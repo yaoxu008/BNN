@@ -228,7 +228,7 @@ class BNN(object):
             if np.mod(epoch, 20) == 0 and epoch != 0:
                 # reselect neg_data
                 if self.dataset_name == 'mnist':
-                    self.data_X, self.data_Y, self.data_Flag = load.pairs_2(self.trSet, self.NP_ratio, self.trlabel)
+                    self.data_X, self.data_Y, self.data_Flag = load.pairs_generate(self.trSet, self.NP_ratio, self.trlabel)
                 elif self.dataset_name == 'xrmb':
                     self.data_X, self.data_Y, self.data_Flag = load.pair_xrmb(self.X1[:self.train_size],
                                                                               self.X2[:self.train_size], self.NP_ratio)
