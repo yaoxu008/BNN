@@ -101,8 +101,8 @@ class BNN(object):
 
         t_vars = tf.trainable_variables()
 
-        self.l_vars = [var for var in t_vars if 'l_' in var.name]
-        self.r_vars = [var for var in t_vars if 'r_' in var.name]
+        self.l_vars = [var for var in t_vars if 'left' in var.name]
+        self.r_vars = [var for var in t_vars if 'right' in var.name]
 
         self.saver = tf.train.Saver()
 
@@ -412,12 +412,12 @@ class BNN(object):
                 scope.reuse_variables()
 
             if self.dataset_name == 'mnist':
-                h0 = mul_conv2d(image, 'l_', self.conv_dim, self.conv_kernel, self.conv_kernel,
-                                d_h=1, d_w=1, stddev=0.02, name="l_mul_conv2d")
+                h0 = mul_conv2d(image, 'r_', self.conv_dim, self.conv_kernel, self.conv_kernel,
+                                d_h=1, d_w=1, stddev=0.02, name="r_mul_conv2d")
             elif self.dataset_name == 'xrmb':
                 kernal_one = np.ones(len(self.conv_kernel))
-                h0 = mul_conv2d(image, 'l_', self.conv_dim, kernal_one, self.conv_kernel,
-                                d_h=1, d_w=1, stddev=0.02, name="l_mul_conv2d")
+                h0 = mul_conv2d(image, 'r_', self.conv_dim, kernal_one, self.conv_kernel,
+                                d_h=1, d_w=1, stddev=0.02, name="r_mul_conv2d")
             h1 = linear(tf.reshape(h0, [self.batch_size, -1]), self.out_dim, 'r_h2_lin')
             return tf.nn.sigmoid(h1)
 
