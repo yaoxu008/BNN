@@ -61,7 +61,7 @@ def mul_conv2d(input, prefix, output_dims, kernel_h, kernel_w, d_h=1, d_w=1, std
             output_dim = output_dims[i]
             w = tf.get_variable(prefix + 'w_' + str(i), [k_h, k_w, input.get_shape()[-1], output_dim],
                                 initializer=tf.truncated_normal_initializer(stddev=stddev))
-            output = tf.nn.conv2d(output, w, strides=[1, d_h, d_w, 1], padding='VALID')
+            output = tf.nn.conv2d(output, w, strides=[1, d_h, d_w, 1], padding='SAME')
 
             biases = tf.get_variable(prefix + 'biases_' + str(i), [output_dims[i]],
                                      initializer=tf.constant_initializer(0.0))
